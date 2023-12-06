@@ -7,7 +7,6 @@ services:
       - ./backend/src:/app/src
     env_file:
       - ./global.env
-      - ./backend/.env
     healthcheck:
       test:
         [
