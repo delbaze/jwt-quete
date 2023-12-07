@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 @ObjectType()
 @Entity()
@@ -15,4 +15,13 @@ export default class User {
   @Field()
   @Column()
   password: string;
+}
+
+@InputType()
+export class InputRegister {
+  @Field()
+  email: string;
+
+  @Field()
+  password: string
 }
