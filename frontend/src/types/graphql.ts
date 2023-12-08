@@ -30,7 +30,7 @@ export type InputRegister = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  register: User;
+  register: UserWithoutPassword;
 };
 
 
@@ -49,6 +49,12 @@ export type User = {
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
   password: Scalars['String']['output'];
+};
+
+export type UserWithoutPassword = {
+  __typename?: 'UserWithoutPassword';
+  email: Scalars['String']['output'];
+  id: Scalars['String']['output'];
 };
 
 export type BooksQueryVariables = Exact<{ [key: string]: never; }>;
