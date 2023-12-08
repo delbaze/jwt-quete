@@ -23,6 +23,21 @@ export type Book = {
   title: Scalars['String']['output'];
 };
 
+export type InputRegister = {
+  email: Scalars['String']['input'];
+  password: Scalars['String']['input'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  register: User;
+};
+
+
+export type MutationRegisterArgs = {
+  infos: InputRegister;
+};
+
 export type Query = {
   __typename?: 'Query';
   books: Array<Book>;
