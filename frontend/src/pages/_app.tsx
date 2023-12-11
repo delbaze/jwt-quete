@@ -5,8 +5,9 @@ import Layout from "@/components/layout-elements/Layout";
 
 export default function App({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
-    uri: "http://backend:4000",
+    uri: "http://localhost:4000",
     cache: new InMemoryCache(),
+    credentials: "include"
   });
 
   return (

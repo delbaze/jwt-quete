@@ -31,11 +31,29 @@ export class UserWithoutPassword implements Omit<User, "password"> {
   email: string;
 }
 
+@ObjectType()
+export class Message {
+  @Field()
+  success: boolean;
+
+  @Field()
+  message: string;
+}
+
 /**----------------------
  **      Input Types
  *------------------------**/
 @InputType()
 export class InputRegister {
+  @Field()
+  email: string;
+
+  @Field()
+  password: string;
+}
+
+@InputType()
+export class InputLogin {
   @Field()
   email: string;
 
