@@ -18,11 +18,13 @@ function Login() {
       });
     }
   };
+  
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24`}
     >
       <form onSubmit={handleSubmit}>
+        <h1 className="font-bold text-lg mb-8">Connexion</h1>
         <div>
           <input type="text" name="email" placeholder="Indiquez votre email" />
         </div>
