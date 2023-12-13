@@ -8,7 +8,8 @@ services:
       - ./backend/demo.sqlite:/app/demo.sqlite
     env_file:
       - ./global.env
-      - ./backend/.env
+      # - ./backend/.env
+      - ./secret.env
     healthcheck:
       test:
         [
@@ -27,6 +28,7 @@ services:
       - ./frontend/src:/app/src
     env_file:
       - ./global.env
+      - ./secret.env
     depends_on:
       backend:
         condition: service_healthy

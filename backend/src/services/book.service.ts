@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
 import datasource from "../lib/datasource";
-import Book from "../entities/book.entity";
+import Book, { InputCreateBook } from "../entities/book.entity";
 
 export default class BookService {
   db: Repository<Book>;
@@ -12,4 +12,8 @@ export default class BookService {
     return this.db.find();
   }
 
+  async createBook({ title }: InputCreateBook) {
+    const newBook = this.db.create({ title });
+    return await this.db.save(newBook);
+  }
 }
