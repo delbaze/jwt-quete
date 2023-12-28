@@ -3,12 +3,8 @@
 ![Bannière](https://w0.peakpx.com/wallpaper/416/836/HD-wallpaper-blue-abstract-background-blue-geometric-abstraction-blue-rectangles-background-abstract-background.jpg)
 
 Ce dépôt contient une base de travail sur la branche main, puis l'avancée petit à petit sur les branches suivantes.
-<svg fill="none" viewBox="0 0 600 100" width="600" height="100" xmlns="http://www.w3.org/2000/svg">
-<foreignObject width="100%" height="100%">
 
-<div style="background-color: #154275; padding: 10px; color: white;">Branches</div>
-</foreignObject>
-</svg>
+## <div style="background-color: #154275; padding: 10px; color: white;">Branches</div>
 
 - **1-register** ⇒ <link>https://github.com/delbaze/jwt-quete/tree/1-register</link>
 - **2-login** ⇒ <link>https://github.com/delbaze/jwt-quete/tree/2-login</link>
