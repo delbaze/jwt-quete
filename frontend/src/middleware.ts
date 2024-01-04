@@ -9,7 +9,6 @@ interface Payload {
 const SECRET_KEY = process.env.SECRET_KEY || "";
 
 export default async function middleware(request: NextRequest) {
-  console.log("COUCOU");
   const { cookies } = request;
   const token = cookies.get("token");
 
@@ -26,16 +25,14 @@ export async function verify(token: string): Promise<Payload> {
 
 async function checkToken(token: string | undefined, request: NextRequest) {
   if (!token) {
-    //si il n'y a pas de token ET que je suis sur book/LIST_BOOKS
-
+    let response: NextResponse<unknown>;
     if (request.nextUrl.pathname.startsWith("/books/list")) {
-      const response = NextResponse.redirect(
-        new URL("/auth/login", request.url)
-      );
-      response.cookies.delete("email");
-      return response;
+      response = NextResponse.redirect(new URL("/auth/login", request.url));
+    } else {
+      response = NextResponse.next();
     }
-    return NextResponse.next();
+    response.cookies.delete("email");
+    return response;
   }
 
   try {

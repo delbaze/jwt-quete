@@ -7,13 +7,13 @@ export default function App({ Component, pageProps }: AppProps) {
   const client = new ApolloClient({
     uri: "http://localhost:4000",
     cache: new InMemoryCache(),
-    credentials: "include"
+    credentials: "include",
   });
 
   return (
     <ApolloProvider client={client}>
       <Layout>
-        <Component {...pageProps}  />
+        <Component {...pageProps} />
       </Layout>
     </ApolloProvider>
   );
