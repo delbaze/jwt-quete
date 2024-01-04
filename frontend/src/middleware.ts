@@ -9,6 +9,7 @@ interface Payload {
 const SECRET_KEY = process.env.SECRET_KEY || "";
 
 export default async function middleware(request: NextRequest) {
+  console.log("COUCOU");
   const { cookies } = request;
   const token = cookies.get("token");
 
@@ -25,14 +26,26 @@ export async function verify(token: string): Promise<Payload> {
 
 async function checkToken(token: string | undefined, request: NextRequest) {
   if (!token) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    //si il n'y a pas de token ET que je suis sur book/LIST_BOOKS
+
+    if (request.nextUrl.pathname.startsWith("/books/list")) {
+      const response = NextResponse.redirect(
+        new URL("/auth/login", request.url)
+      );
+      response.cookies.delete("email");
+      return response;
+    }
+    return NextResponse.next();
   }
 
   try {
     const payload = await verify(token);
 
     if (payload?.email) {
-      return NextResponse.next();
+      const response = NextResponse.next();
+
+      response.cookies.set("email", payload.email);
+      return response;
     }
     return NextResponse.redirect(new URL("/auth/login", request.url));
   } catch (err) {
@@ -41,6 +54,6 @@ async function checkToken(token: string | undefined, request: NextRequest) {
   }
 }
 
-export const config = {
-  matcher: "/books/list/:path*",
-};
+// export const config = {
+//   matcher: "/books/list/:path*",
+// };

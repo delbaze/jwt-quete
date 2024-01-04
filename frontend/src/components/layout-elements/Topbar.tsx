@@ -1,11 +1,20 @@
 import Link from "next/link";
-
+import Cookies from "js-cookie"
+import { useEffect, useState } from "react";
 function Topbar() {
+  const [state, setState] = useState("");
+  useEffect(() => {
+    const email = Cookies.get("email");
+    if (email){
+      setState(email);
+    } 
+
+  },[])
   return (
     <nav className="fixed inset-x-0 top-0 z-10 w-full px-4 py-1 bg-white shadow-md border-slate-500 dark:bg-[#0c1015] transition duration-700 ease-out">
       <div className="flex justify-between p-4">
         <div className="text-[2rem] leading-[3rem] tracking-tight font-bold text-black dark:text-white">
-          Quête JWT
+          <div>Quête JWT {state ?? ""}</div>
         </div>
         <div className="flex items-center space-x-4 text-lg font-semibold tracking-tight">
           <Link
