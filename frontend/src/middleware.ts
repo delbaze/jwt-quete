@@ -25,9 +25,12 @@ export async function verify(token: string): Promise<Payload> {
 }
 
 async function checkToken(token: string | undefined, request: NextRequest) {
+  let response: NextResponse<unknown>;
   if (!token) {
-    let response: NextResponse<unknown>;
-    if (request.nextUrl.pathname.startsWith("/books/list")) {
+    if (
+      request.nextUrl.pathname.startsWith("/books/list") ||
+      request.nextUrl.pathname.startsWith("/admin/books")
+    ) {
       response = NextResponse.redirect(new URL("/auth/login", request.url));
     } else {
       response = NextResponse.next();
@@ -39,22 +42,35 @@ async function checkToken(token: string | undefined, request: NextRequest) {
 
   try {
     const payload = await verify(token);
-    console.log("PAYLOAD", payload);
 
-    if (payload.email) {
-      const response = NextResponse.next();
+    if (payload.email && payload.role) {
+      response = NextResponse.next();
+      //vérifier si la route commence par admin, et que le payload.role n'est pas admin, je redirige
+      if (
+        request.nextUrl.pathname.startsWith("/admin/books") &&
+        payload.role !== "ADMIN"
+      ) {
+        response = NextResponse.redirect(new URL("/400", request.url));
+      }
 
       response.cookies.set("email", payload.email);
       response.cookies.set("role", payload.role);
+
       return response;
     }
     return NextResponse.redirect(new URL("/auth/login", request.url));
   } catch (err) {
-    console.error("Verification failed", err);
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+    console.log('%c⧭', 'color: #e50000', err);
+    console.log("ERROR");
+    if (request.nextUrl.pathname.startsWith("/auth/login")) {
+      response = NextResponse.next();
+    } else {
+      response = NextResponse.redirect(new URL("/auth/login", request.url));
+    }
+    return response;
   }
 }
 
-// export const config = {
-//   matcher: "/books/list/:path*",
-// };
+export const config = {
+  matcher: "/:path*",
+};

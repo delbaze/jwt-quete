@@ -46,12 +46,18 @@ export type Message = {
 export type Mutation = {
   __typename?: 'Mutation';
   createBook: Book;
+  deleteBook: Book;
   register: UserWithoutPassword;
 };
 
 
 export type MutationCreateBookArgs = {
   infos: InputCreateBook;
+};
+
+
+export type MutationDeleteBookArgs = {
+  id: Scalars['String']['input'];
 };
 
 

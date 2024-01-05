@@ -5,7 +5,6 @@ function Topbar() {
   const [state, setState] = useState<string | undefined>("");
   useEffect(() => {
     const email = Cookies.get("email");
-    console.log("%c⧭", "color: #00e600", email);
     setState(email);
   }, [Cookies.get("email")]);
   return (
