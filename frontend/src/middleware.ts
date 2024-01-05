@@ -4,6 +4,7 @@ import { jwtVerify } from "jose";
 
 interface Payload {
   email: string;
+  role: string;
 }
 
 const SECRET_KEY = process.env.SECRET_KEY || "";
@@ -32,16 +33,19 @@ async function checkToken(token: string | undefined, request: NextRequest) {
       response = NextResponse.next();
     }
     response.cookies.delete("email");
+    response.cookies.delete("role");
     return response;
   }
 
   try {
     const payload = await verify(token);
+    console.log("PAYLOAD", payload);
 
-    if (payload?.email) {
+    if (payload.email) {
       const response = NextResponse.next();
 
       response.cookies.set("email", payload.email);
+      response.cookies.set("role", payload.role);
       return response;
     }
     return NextResponse.redirect(new URL("/auth/login", request.url));

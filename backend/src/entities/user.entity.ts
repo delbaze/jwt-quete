@@ -2,6 +2,8 @@ import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Field, InputType, ObjectType } from "type-graphql";
 import * as argon2 from "argon2";
 
+type ROLE = "ADMIN" | "USER"
+
 @ObjectType()
 @Entity()
 export default class User {
@@ -21,6 +23,15 @@ export default class User {
   @Field()
   @Column()
   password: string;
+
+  @Field()
+  @Column({
+    type: "text",
+    enum: ["ADMIN", "USER"],
+    nullable: true, 
+    default: "USER"
+  })
+  role: ROLE
 }
 @ObjectType()
 export class UserWithoutPassword implements Omit<User, "password"> {
@@ -29,6 +40,9 @@ export class UserWithoutPassword implements Omit<User, "password"> {
 
   @Field()
   email: string;
+
+  @Field(() => String)
+  role: ROLE;
 }
 
 @ObjectType()

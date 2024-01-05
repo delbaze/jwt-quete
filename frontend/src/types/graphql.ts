@@ -77,12 +77,14 @@ export type User = {
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
   password: Scalars['String']['output'];
+  role: Scalars['String']['output'];
 };
 
 export type UserWithoutPassword = {
   __typename?: 'UserWithoutPassword';
   email: Scalars['String']['output'];
   id: Scalars['String']['output'];
+  role: Scalars['String']['output'];
 };
 
 export type RegisterMutationVariables = Exact<{

@@ -4,7 +4,7 @@ import Book, { InputCreateBook } from "../entities/book.entity";
 
 @Resolver()
 export default class BookResolver {
-  @Authorized(["MANAGER"])
+  @Authorized()
   @Query(() => [Book])
   async books() {
     return await new BookService().listBooks();
@@ -14,5 +14,12 @@ export default class BookResolver {
   async createBook(@Arg("infos") infos: InputCreateBook) {
     const newBook = await new BookService().createBook(infos);
     return newBook;
+  }
+
+  @Authorized(["ADMIN"])
+  @Mutation(() => Book)
+  async deleteBook(@Arg("id") id: string) {
+    const bookDeleted = await new BookService().deleteBook(id);
+    return bookDeleted;
   }
 }

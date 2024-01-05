@@ -26,7 +26,7 @@ export default class UserResolver {
     const isPasswordValid = await argon2.verify(user.password, infos.password);
     const m = new Message();
     if (isPasswordValid) {
-      const token = await new SignJWT({ email: user.email })
+      const token = await new SignJWT({ email: user.email, role: user.role })
         .setProtectedHeader({ alg: "HS256", typ: "jwt" })
         .setExpirationTime("2h")
         .sign(new TextEncoder().encode(`${process.env.SECRET_KEY}`));
