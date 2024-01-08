@@ -11,6 +11,10 @@ Ce dépôt contient une base de travail sur la branche main, puis l'avancée pet
 - **3-register-suite** ⇒ <link>https://github.com/delbaze/jwt-quete/tree/3-register-suite</link>
 - **4-books-create** ⇒ <link>https://github.com/delbaze/jwt-quete/tree/4-books-create</link>
 
+*Branches bonus:
+- **5-passage-infos** ⇒ <link>https://github.com/delbaze/jwt-quete/tree/5-passage-infos</link>
+- **6-mailer** ⇒ <link>https://github.com/delbaze/jwt-quete/tree/6-mailer</link>
+
 ## <div style="background-color: #154275; padding: 10px; color: white;">Structure du Projet</div>
 
 - **backend/** : Application TypeGraphQL avec Apollo Server
