@@ -1,6 +1,12 @@
 import { LOGIN } from "@/requetes/queries/auth.queries";
-import { InputLogin, LoginQuery, LoginQueryVariables, useLoginLazyQuery } from "@/types/graphql";
+import {
+  InputLogin,
+  LoginQuery,
+  LoginQueryVariables,
+  useLoginLazyQuery,
+} from "@/types/graphql";
 import { useLazyQuery } from "@apollo/client";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 function Login() {
@@ -52,6 +58,8 @@ function Login() {
             <span className="text-red-500">{data?.login?.message}</span>
           )}
         </div>
+        <Link href="/auth/reset">mot de passe oublié?</Link>
+
       </form>
     </main>
   );

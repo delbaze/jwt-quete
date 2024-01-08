@@ -1,6 +1,7 @@
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { AfterInsert, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { Field, InputType, ObjectType } from "type-graphql";
 import * as argon2 from "argon2";
+import Mailer from "../lib/mailer";
 
 type ROLE = "ADMIN" | "USER"
 
@@ -8,8 +9,25 @@ type ROLE = "ADMIN" | "USER"
 @Entity()
 export default class User {
   @BeforeInsert()
+  @BeforeUpdate()
   protected async hashPassword() {
-    this.password = await argon2.hash(this.password);
+    if (!this.password.startsWith("$argon2")){
+      this.password = await argon2.hash(this.password);
+    }
+  } 
+
+  @AfterInsert()
+  protected async afterRegister(){
+    const mailer = new Mailer(
+      undefined,
+      this.email,
+      "Coucou",
+      process.env.SENDGRID_TEMPLATE_REGISTER!,
+      {
+        email: this.email,
+      }
+    );
+    await mailer.send();
   }
 
   @Field()
@@ -70,6 +88,15 @@ export class InputRegister {
 export class InputLogin {
   @Field()
   email: string;
+
+  @Field()
+  password: string;
+}
+
+@InputType()
+export class InputChangePassword {
+  @Field()
+  token: string;
 
   @Field()
   password: string;

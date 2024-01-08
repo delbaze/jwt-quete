@@ -8,6 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/server": "^4.9.5",
+    "@sendgrid/mail": "^8.1.0",
     "argon2": "^0.31.2",
     "class-validator": "^0.14.0",
     "cookies": "^0.8.0",
@@ -17,7 +18,8 @@
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.1.6",
     "type-graphql": "^2.0.0-beta.4",
-    "typeorm": "^0.3.17"
+    "typeorm": "^0.3.17",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/cookies": "^0.7.10",

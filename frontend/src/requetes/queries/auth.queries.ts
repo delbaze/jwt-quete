@@ -17,3 +17,12 @@ export const LOGOUT = gql`
     }
   }
 `;
+
+export const CHECK_RESET_TOKEN = gql`
+  query CheckResetToken($token: String!) {
+    checkResetToken(token: $token) {
+      message
+      success
+    }
+  }
+`;
