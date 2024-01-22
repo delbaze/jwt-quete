@@ -9,7 +9,7 @@ export default class BookService {
   }
 
   async findBook(id: string) {
-    const book = this.db.findOneBy({ id });
+    const book = await this.db.findOneBy({ id });
     if (!book) {
       throw new Error("Ce livre n'existe pas");
     }
