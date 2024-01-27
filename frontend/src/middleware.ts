@@ -67,6 +67,8 @@ async function checkToken(token: string | undefined, request: NextRequest) {
     } else {
       response = NextResponse.redirect(new URL("/auth/login", request.url));
     }
+    response.cookies.delete("token");//suppression du token s'il n'est pas valide (puisque l'on tombe dans le catch)
+
     return response;
   }
 }
