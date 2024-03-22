@@ -67,7 +67,7 @@ function Login() {
         <Link href="/auth/reset">mot de passe oublié?</Link>
       </form>
 
-      {demoContext.state.map((s) => (
+      {demoContext.stateValueWithFilter("f").map((s) => (
         <li key={s}>{s}</li>
       ))}
       <button></button>
