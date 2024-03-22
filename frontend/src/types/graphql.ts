@@ -340,7 +340,7 @@ export const LoginDocument = gql`
  *   },
  * });
  */
-export function useLoginQuery(baseOptions: Apollo.QueryHookOptions<LoginQuery, LoginQueryVariables>) {
+export function useLoginQuery(baseOptions: Apollo.QueryHookOptions<LoginQuery, LoginQueryVariables> & ({ variables: LoginQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<LoginQuery, LoginQueryVariables>(LoginDocument, options);
       }
@@ -421,7 +421,7 @@ export const CheckResetTokenDocument = gql`
  *   },
  * });
  */
-export function useCheckResetTokenQuery(baseOptions: Apollo.QueryHookOptions<CheckResetTokenQuery, CheckResetTokenQueryVariables>) {
+export function useCheckResetTokenQuery(baseOptions: Apollo.QueryHookOptions<CheckResetTokenQuery, CheckResetTokenQueryVariables> & ({ variables: CheckResetTokenQueryVariables; skip?: boolean; } | { skip: boolean; }) ) {
         const options = {...defaultOptions, ...baseOptions}
         return Apollo.useQuery<CheckResetTokenQuery, CheckResetTokenQueryVariables>(CheckResetTokenDocument, options);
       }

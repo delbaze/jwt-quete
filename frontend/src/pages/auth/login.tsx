@@ -1,3 +1,5 @@
+import { DemoContext } from "@/contexts/DemoContext";
+import useDemoContext from "@/hooks/useDemoContext";
 import { LOGIN } from "@/requetes/queries/auth.queries";
 import {
   InputLogin,
@@ -8,8 +10,12 @@ import {
 import { useLazyQuery } from "@apollo/client";
 import Link from "next/link";
 import { useRouter } from "next/router";
+// import { useContext } from "react";
 
 function Login() {
+  const demoContext = useDemoContext();
+  // const context = useContext(DemoContext);
+
   const router = useRouter();
   // const [login, { data, error }] = useLoginLazyQuery()
   const [login, { data, error }] = useLazyQuery<
@@ -59,8 +65,12 @@ function Login() {
           )}
         </div>
         <Link href="/auth/reset">mot de passe oublié?</Link>
-
       </form>
+
+      {demoContext.state.map((s) => (
+        <li key={s}>{s}</li>
+      ))}
+      <button></button>
     </main>
   );
 }
